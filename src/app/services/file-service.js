@@ -2,7 +2,16 @@ export const FileService = {
   selector: 'fileService',
   service: class
     FileService {
+    constructor(jsonService) {
+      this.jsonService = jsonService;
+    }
 
+    /**
+     * download file with data 
+     * @param {*} data 
+     * @param {*} filename 
+     * @param {*} type 
+     */
     download(data, filename, type) {
       var file = new Blob([data], { type: type });
       if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -21,5 +30,25 @@ export const FileService = {
       }
     }
 
+    /**
+     * read file
+     * @param {*} element | input element with type file 
+     */
+    fileReader(element) {
+      var that = this;
+      return new Promise((res, rej) => {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          let { status, data } = that.jsonService.decodeBase64toJson(e.target.result);
+          console.log(data);
+          if (status) {
+            res(Object.assign([], that.jsonService.noramlizeJson(data)));
+          } else {
+            rej('Json parse failed');
+          }
+        };
+        reader.readAsText(element.files[0]);
+      });
+    }
   }
 };

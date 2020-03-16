@@ -8,14 +8,13 @@ export const JsonService = {
      * @param {*} data 
      */
     decodeBase64toJson(data) {
-      let text = atob(data);
 
       // json valid
-      if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
+      if (/^[\],:{}\s]*$/.test(data.replace(/\\["\\\/bfnrtu]/g, '@').
         replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
         replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
-        return { status: true, data: JSON.parse(text) }
+        return { status: true, data: JSON.parse(data) }
       } else {
         return { status: false, data: {} }
       }

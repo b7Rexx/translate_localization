@@ -3,11 +3,15 @@ class HomeController {
     var that = this;
     this.jsonService = jsonService;
     this.fileService = fileService;
+    
+    /**
+     * english file input handler
+     */
     $scope.englishFileChangeHandler = (element) => {
       this.loader = true;
       $scope.$apply();
 
-      this.fileReader(element).then(res => {
+      this.fileService.fileReader(element).then(res => {
         that.englishList = res;
         that.downloadBtn = false;
         that.updateJapanese();
@@ -17,10 +21,14 @@ class HomeController {
         $scope.$apply();
       });
     };
+       
+    /**
+     * japanese file input handler
+     */
     $scope.japaneseFileChangeHandler = (element) => {
       this.loader = true;
       $scope.$apply();
-      this.fileReader(element).then(res => {
+      this.fileService.fileReader(element).then(res => {
         that.japaneseList = res;
         that.updateJapanese();
         $scope.$apply();
@@ -36,23 +44,6 @@ class HomeController {
     this.loader = false;
     this.englishList = [];
     this.japaneseList = [];
-  }
-
-  fileReader(element) {
-    var that = this;
-    return new Promise((res, rej) => {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        let { status, data } = that.jsonService.decodeBase64toJson(e.target.result.split('base64,')[1]);
-        console.log(data);
-        if (status) {
-          res(Object.assign([], that.jsonService.noramlizeJson(data)));
-        } else {
-          rej('Json parse failed');
-        }
-      };
-      reader.readAsDataURL(element.files[0]);
-    });
   }
 
   updateJapanese() {
@@ -71,7 +62,7 @@ class HomeController {
 
   downloadFile() {
     var downloadJson = this.jsonService.revertNormalizeJson(this.englishList);
-    this.fileService.download(JSON.stringify(downloadJson), 'progress.json', 'txt');
+    this.fileService.download(JSON.stringify(downloadJson), 'output.json', 'txt');
   }
 }
 
