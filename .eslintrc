@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "import/prefer-default-export": "off",
+    "comma-dangle": "off",
+    "function-paren-newline": "off",
+    "no-unused-expressions": "off"
+  }
+}

@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 13
+cache:
+  directories:
+    - node_modules
+befre_script:
+  - npm install
+script:
+  - npm build:prod
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master

@@ -1,0 +1,16 @@
+{
+    "application_name": "Purchasing Manager",
+    "language": {
+        "dir": "ltr",
+        "name": "English",
+        "abbrev": "EN"
+    },
+    "common": {
+        "attachment": {
+            "attachments": "@:common.labels.attachments",
+            "filename": "@:common.labels.filename",
+            "size": "@:common.labels.size",
+            "delete-attachment": "@:common.confirmations.delete_attachment"
+        }
+    }
+}
