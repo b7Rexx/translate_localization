@@ -7,7 +7,7 @@ cache:
 befre_script:
   - npm install
 script:
-  - npm build:prod
+  - npm run build:prod
 deploy:
   provider: pages
   skip_cleanup: true
