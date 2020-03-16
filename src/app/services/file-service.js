@@ -3,6 +3,7 @@ export const FileService = {
   service: class
     FileService {
     constructor(jsonService) {
+      'ngInject';
       this.jsonService = jsonService;
     }
 

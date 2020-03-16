@@ -23,7 +23,7 @@ var translateListTemplate =
       </td>
     </tr>
     <tr ng-show="filteredItems.length === 0">
-      <td colspan="2">No item available for translation !! upload json file to parse !!</td>
+      <td colspan="2">No item available for translation !! upload english json file !!</td>
     </tr>
   </tbody>
 </table>

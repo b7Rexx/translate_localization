@@ -2,6 +2,9 @@ export const JsonService = {
   selector: 'jsonService',
   service: class
     JsonService {
+    constructor() {
+      'ngInject';
+    }
 
     /**
      * parse json with validation

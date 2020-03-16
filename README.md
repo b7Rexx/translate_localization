@@ -1,2 +1,2 @@
-# angularjs-webpack-boilerplate
-Quick boilerplate for AngularJS used with Webpack. Supporting component architecture.
+# Translate localized UI Application
+UI for accumulating json from localized files to upload merge and download updated json file.
