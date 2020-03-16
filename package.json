@@ -1,8 +1,8 @@
 {
-  "homepage": "https://b7rexx.github.io/todo-react",
+  "homepage": "https://b7rexx.github.io/translate_localization",
   "name": "angularjs-translate-app",
   "version": "1.0.0",
-  "author": "",
+  "author": "Bijen Maharjan",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",

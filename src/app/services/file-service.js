@@ -41,7 +41,6 @@ export const FileService = {
         var reader = new FileReader();
         reader.onload = function (e) {
           let { status, data } = that.jsonService.decodeBase64toJson(e.target.result);
-          console.log(data);
           if (status) {
             res(Object.assign([], that.jsonService.noramlizeJson(data)));
           } else {
