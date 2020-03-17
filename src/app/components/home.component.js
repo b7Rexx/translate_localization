@@ -69,56 +69,55 @@ class HomeController {
 
 var homeTemplate =
   `<div class="container">
-<div class="text-center">
-  <h3>Translate Localized Json</h3>
-</div>
-<div class="content">
-  <div ng-show="$ctrl.loader" class="loading"></div>
-  <div ng-hide="$ctrl.loader">
-    <div class="row justify-content-center mt-2 mb-4">
-      <div class="col-md-2 text-right">
-        <label for="input-file">English Json File</label>
-      </div>
-      <div class="col-md-3">
-        <input type="file" id="input-file" class="form-control"
-          onchange="angular.element(this).scope().englishFileChangeHandler(this)" />
-      </div>
-      <div class="col-md-1 mt-1 single-line-word">
-        <span class="text-green" ng-show="$ctrl.englishList.length > 0">
-          <i class="fa fa-check"></i> {{$ctrl.englishList.length}} 
-        </span>
-        <span class="text-danger" ng-show="$ctrl.englishList.length === 0">
-          <i class="fa fa-asterisk"></i>
-        </span>
-      </div>
-      <div class="col-md-2 text-right">
-        <label for="output-file">Japanese Json File</label>
-      </div>
-      <div class="col-md-3">
-        <input type="file" id="output-file" class="form-control"
-          onchange="angular.element(this).scope().japaneseFileChangeHandler(this)" />
-      </div>
-      <div class="col-md-1 mt-1 single-line-word">
-        <span class="text-green" ng-show="$ctrl.japaneseList.length > 0">
-          <i class="fa fa-check"></i> {{$ctrl.japaneseList.length}} 
-        </span>
-        <span class="text-warning" ng-show="$ctrl.japaneseList.length === 0">
-          <i class="fa fa-asterisk"></i>
-        </span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <translate-list normalized-list="$ctrl.englishList"></translate-list>
-        <div class="text-center">
-          <button class="btn btn-outline-primary" ng-disabled="$ctrl.downloadBtn" ng-click="$ctrl.downloadFile()">
-            <i class="fa fa-download"> Download Japanese Json File </i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+ <div class="text-center p-2">
+   <h3>Translate Localized Json</h3>
+ </div>
+ <div class="content">
+   <div ng-show="$ctrl.loader" class="loading"></div>
+   <div ng-hide="$ctrl.loader">
+     <div class="row justify-content-center mt-2 mb-4">
+       <div class="col-sm-6 col-md-2">
+         <label for="input-file">English Json File</label>
+         <div class="mt-1 single-line-word d-inline">
+           <span class="text-green" ng-show="$ctrl.englishList.length > 0">
+             <i class="fa fa-check"></i> {{$ctrl.englishList.length}}
+           </span>
+           <span class="text-danger" ng-show="$ctrl.englishList.length === 0">
+             <i class="fa fa-asterisk"></i>
+           </span>
+         </div>
+
+       </div>
+       <div class="col-sm-6 col-md-3 mb-2">
+         <input type="file" id="input-file" class="form-control"
+           onchange="angular.element(this).scope().englishFileChangeHandler(this)" />
+       </div>
+      <div class="col-md-2"></div> 
+       <div class="col-sm-6 col-md-2">
+         <label for="output-file">Japanese Json File</label>
+         <div class="mt-1 single-line-word d-inline">
+           <span class="text-green" ng-show="$ctrl.japaneseList.length > 0">
+             <i class="fa fa-check"></i> {{$ctrl.japaneseList.length}}
+           </span>
+         </div>
+       </div>
+       <div class="col-sm-6 col-md-3 mb-2">
+         <input type="file" id="output-file" class="form-control"
+           onchange="angular.element(this).scope().japaneseFileChangeHandler(this)" />
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-sm-12">
+         <translate-list normalized-list="$ctrl.englishList"></translate-list>
+         <div class="text-center">
+           <button class="btn btn-outline-primary" ng-disabled="$ctrl.downloadBtn" ng-click="$ctrl.downloadFile()">
+             <i class="fa fa-download"> Download Japanese Json File </i>
+           </button>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
 </div>`;
 
 export const HomeComponent = {

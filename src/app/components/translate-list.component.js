@@ -3,7 +3,7 @@ class TranslateListController {
 
 var translateListTemplate =
   `<div class="translate-list">
-<table class="table table-hover">
+<table class="table table-responsive table-hover">
   <thead>
     <tr>
       <th class="text-center" width="5%">SN</th>
