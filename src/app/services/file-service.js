@@ -34,15 +34,16 @@ export const FileService = {
     /**
      * read file
      * @param {*} element | input element with type file 
+     * @param {*} ignoreString 
      */
-    fileReader(element) {
+    fileReader(element, ignoreString = '') {
       var that = this;
       return new Promise((res, rej) => {
         var reader = new FileReader();
         reader.onload = function (e) {
           let { status, data } = that.jsonService.decodeBase64toJson(e.target.result);
           if (status) {
-            res(Object.assign([], that.jsonService.noramlizeJson(data)));
+            res(Object.assign([], that.jsonService.noramlizeJson(data, ignoreString)));
           } else {
             rej('Json parse failed');
           }

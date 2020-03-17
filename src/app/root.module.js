@@ -1,5 +1,6 @@
 import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
+import Swal from 'sweetalert2';
 
 import './root.component.scss';
 
@@ -16,11 +17,14 @@ import { ChangeStatusFilter } from './filters/change-status.filter';
 //services
 import { JsonService } from './services/json-service';
 import { FileService } from './services/file-service';
+import { SwalService } from './services/swal-service';
 
 angular
   .module('root', [uiRouter])
-  .component(RootComponent.selector, RootComponent)
+  .value('IGNORE_STRING', '@:')
+  .constant('Swal', Swal)
 
+  .component(RootComponent.selector, RootComponent)
   // components
   .component(HomeComponent.selector, HomeComponent)
   .component(TestComponent.selector, TestComponent)
@@ -29,6 +33,7 @@ angular
   // services
   .service(JsonService.selector, JsonService.service)
   .service(FileService.selector, FileService.service)
+  .service(SwalService.selector, SwalService.service)
 
   .filter(ChangeStatusFilter.selector, ChangeStatusFilter.filterFn)
   // router

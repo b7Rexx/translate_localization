@@ -9,6 +9,10 @@
     --bg-secondary--: #102B7B;
 }
 
+body {
+    background: var(--bg-secondary--);
+}
+
 h1,
 h2,
 h3,
@@ -71,14 +75,18 @@ h4 {
     background: var(--bg-primary--);
     padding: 10px 10px 30px;
     border-radius: 10px;
-    box-shadow: 0 20px 40px #f0f0f3
+    box-shadow: 0 0 10px #f0f0f3
 }
 
 .text-green {
     color: var(--text-primary--);
 }
 
-.single-line-word{
+.single-line-word {
     white-space: nowrap;
     overflow: hidden;
+}
+
+.form-control {
+    border: none;
 }

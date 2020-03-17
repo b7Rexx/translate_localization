@@ -1,10 +1,12 @@
 class HomeController {
-  constructor($scope, jsonService, fileService) {
+  constructor($scope, jsonService, fileService, swalService, IGNORE_STRING) {
     'ngInject';
     var that = this;
     this.jsonService = jsonService;
     this.fileService = fileService;
-
+    this.swalService = swalService;
+    this.IGNORE_STRING = IGNORE_STRING || '';
+    this.ignoreString = IGNORE_STRING || '';
     /**
      * english file input handler
      */
@@ -12,7 +14,7 @@ class HomeController {
       this.loader = true;
       $scope.$apply();
 
-      this.fileService.fileReader(element).then(res => {
+      this.fileService.fileReader(element, that.IGNORE_STRING).then(res => {
         that.englishList = res;
         that.downloadBtn = false;
         that.updateJapanese();
@@ -29,7 +31,7 @@ class HomeController {
     $scope.japaneseFileChangeHandler = (element) => {
       this.loader = true;
       $scope.$apply();
-      this.fileService.fileReader(element).then(res => {
+      this.fileService.fileReader(element, that.IGNORE_STRING).then(res => {
         that.japaneseList = res;
         that.updateJapanese();
         $scope.$apply();
@@ -38,6 +40,26 @@ class HomeController {
         $scope.$apply();
       });
     };
+
+    /**
+     * change ingore string input handler with alert
+     */
+    $scope.changeIgnoreStringHandler = (element) => {
+      that.swalService.confirm('Are you sure ?', 'This will reset your progress!')
+        .then(result => {
+          if (result.value) {
+            that.IGNORE_STRING = element.value;
+            that.englishList = [];
+            that.japaneseList = [];
+            this.downloadBtn = true;
+            $scope.$apply();
+          } else {
+            that.ignoreString = that.IGNORE_STRING;
+            $scope.$apply();
+          }
+        });
+    };
+
   }
 
   $onInit() {
@@ -62,9 +84,10 @@ class HomeController {
   }
 
   downloadFile() {
-    var downloadJson = this.jsonService.revertNormalizeJson(this.englishList);
+    var downloadJson = this.jsonService.revertNormalizeJson(this.englishList, this.IGNORE_STRING);
     this.fileService.download(JSON.stringify(downloadJson), 'output.json', 'txt');
   }
+
 }
 
 var homeTemplate =
@@ -75,6 +98,13 @@ var homeTemplate =
  <div class="content">
    <div ng-show="$ctrl.loader" class="loading"></div>
    <div ng-hide="$ctrl.loader">
+   <div class="row justify-content-center">
+  <div class="col-sm-6">
+    <span>Ignore string starting with</span>
+    <input type="text" class=" col-sm-4 form-control d-inline" ng-value="$ctrl.ignoreString" 
+    onchange="angular.element(this).scope().changeIgnoreStringHandler(this)" />
+  </div>
+</div>
      <div class="row justify-content-center mt-2 mb-4">
        <div class="col-sm-6 col-md-2">
          <label for="input-file">English Json File</label>

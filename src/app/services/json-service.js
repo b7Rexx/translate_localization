@@ -40,7 +40,7 @@ export const JsonService = {
      *  }
      * ]
      */
-    noramlizeJson(data) {
+    noramlizeJson(data, ignoreString = '') {
       var uniqId = 0;
       var outputArray = [];
       normalize(data, outputArray);
@@ -77,7 +77,7 @@ export const JsonService = {
             translateObj.children = childrenArray || [];
           }
           else if (typeof itemValue === 'string') {
-            if (itemValue.startsWith('@:'))
+            if (itemValue.startsWith(ignoreString))
               translateObj.change = false;
           }
 
@@ -87,7 +87,7 @@ export const JsonService = {
       }
     }
 
-    revertNormalizeJson(data) {
+    revertNormalizeJson(data, ignoreString = '') {
       var nodeArray = data.map(item => { return item.node });
       var max = Math.max(...nodeArray);
       var nodeList = [];
@@ -104,7 +104,7 @@ export const JsonService = {
         nodeList[node].map(element => {
           if (node_key === element.nodeKey) {
             if (element.type === 'string') {
-              if (element.value.startsWith('@:'))
+              if (element.value.startsWith(ignoreString))
                 outputArray[element.key] = element.value || '';
               else
                 outputArray[element.key] = element.output || '';
