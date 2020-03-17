@@ -41,9 +41,9 @@ angular
     'ngInject';
     $stateProvider
       .state(TestComponent.selector, { url: `/${TestComponent.selector}`, component: TestComponent.selector })
-      .state(HomeComponent.selector, { url: '/translate_localization/', component: HomeComponent.selector });
+      .state(HomeComponent.selector, { url: '/', component: HomeComponent.selector });
 
     $locationProvider.hashPrefix('');
     $locationProvider.html5Mode(true);
-    $urlRouterProvider.otherwise('/translate_localization/');
+    $urlRouterProvider.otherwise('/');
   });

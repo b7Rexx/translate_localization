@@ -110,7 +110,7 @@ module.exports = {
     chunkFilename: '[name].chunk-[hash]-[id].js',
     sourceMapFilename: '[name].bundle-[hash]-[id].map',
     path: path.join(__dirname, 'build'),
-    publicPath: '/translate_localization/',
+    publicPath: '/',
   },
   optimization: {
     splitChunks: {
