@@ -1,7 +1,8 @@
 class HomeController {
-  constructor($scope, jsonService, fileService, swalService, IGNORE_STRING) {
+  constructor($scope, $filter, jsonService, fileService, swalService, IGNORE_STRING) {
     'ngInject';
     var that = this;
+    this.$filter = $filter;
     this.jsonService = jsonService;
     this.fileService = fileService;
     this.swalService = swalService;
@@ -80,6 +81,9 @@ class HomeController {
           item.output = matchKey.value;
       }
     });
+
+    this.englishList =
+      this.$filter('orderBy')(this.englishList, 'output');  
     this.loader = false;
   }
 

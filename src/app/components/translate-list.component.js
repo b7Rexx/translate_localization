@@ -1,4 +1,5 @@
 class TranslateListController {
+
 }
 
 var translateListTemplate =
@@ -13,7 +14,7 @@ var translateListTemplate =
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="(index,item) in (filteredItems = ($ctrl.normalizedList | changeStatus|orderBy:'output'))">
+    <tr ng-repeat="(index,item) in (filteredItems = ($ctrl.normalizedList | changeStatus))">
       <td width="5%" class="text-center">{{index+1}}</td>
       <td width="45%">{{item.value}}</td>
       <td width="40%"><input ng-model="item.output" class="table-input form-control"/></td>
