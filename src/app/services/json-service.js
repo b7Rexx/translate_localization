@@ -87,6 +87,11 @@ export const JsonService = {
       }
     }
 
+    /**
+     * denormalize above json
+     * @param {*} data 
+     * @param {*} ignoreString 
+     */
     revertNormalizeJson(data, ignoreString = '') {
       var nodeArray = data.map(item => { return item.node });
       var max = Math.max(...nodeArray);
@@ -97,11 +102,18 @@ export const JsonService = {
         });
       }
       var outArray = {};
-      accumulateChildren(data, 0, outArray);
+      accumulateChildren(0, outArray);
       return outArray;
 
-      function accumulateChildren(data, node = 0, outputArray, node_key = '') {
+      /**
+       * 
+       * @param {*} node current node
+       * @param {*} outputArray parent array for the node current list
+       * @param {*} node_key nodekey for children filter
+       */
+      function accumulateChildren(node = 0, outputArray, node_key = '') {
         nodeList[node].map(element => {
+          // append to node if children
           if (node_key === element.nodeKey) {
             if (element.type === 'string') {
               if (element.value.startsWith(ignoreString))
@@ -110,8 +122,11 @@ export const JsonService = {
                 outputArray[element.key] = element.output || '';
             } else if (element.type === 'object') {
               outputArray[element.key] = {};
-              accumulateChildren(data, node + 1, outputArray[element.key], element.nestedKey);
+              accumulateChildren(node + 1, outputArray[element.key], element.nestedKey);
             }
+            //remove added children for optimization
+            var removeIndex = nodeList[node].indexOf(element);
+            nodeList[node] = nodeList[node].slice(0, removeIndex).concat(nodeList[node].slice(removeIndex + 1, nodeList[node].length))
           }
         });
       }
